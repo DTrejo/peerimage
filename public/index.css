@@ -1,0 +1,19 @@
+body {
+  font-size: 125%;
+  font-family: baskerville;
+  padding: 1.5em;
+}
+
+body > p {
+  margin-bottom: 4.5em;
+}
+body > p > label {
+  border: 1px dotted purple;
+  padding: 1.5em;
+}
+body > img {
+  margin-top: 1.5em;
+  margin-left: 1.5em;
+  display: inline;
+  float:left;
+}

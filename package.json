@@ -9,5 +9,10 @@
   "repository": "",
   "author": "",
   "license": "BSD",
-  "dependencies": {}
+  "dependencies": {
+    "browserify-watcher": "~1.0.0",
+    "error-page": "0.0.6",
+    "ecstatic": "~0.4.1",
+    "peer": "~0.1.4"
+  }
 }
