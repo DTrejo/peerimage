@@ -9,8 +9,7 @@ function main() {
   var images = [];
 
   var opts = { port: 9000, host: '/', debug: true }
-  var reliable;
-  // reliable = true
+  var reliable = true;
   var copts = { reliable: reliable }
   var id = (window.location.pathname + '').replace(/\//g, '0')
   console.log('woo! My ID is', id)
