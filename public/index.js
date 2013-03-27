@@ -20,11 +20,13 @@ function main() {
   peer.on('connection', function(con) {
     con.on('open', function() {
       cons.push(con)
+      $('p').first().prepend('<div>Someone connected; they\'ll get your images!</div>')
 
-      console.log('con on open', con)
+
+      console.log('PARENT con on open', con)
 
       if (images.length) {
-        console.log('sending to ', con, images)
+        console.log('PARENT sending to ', con, images)
         con.send(images)
       }
       // con.send('hihi')
@@ -32,7 +34,7 @@ function main() {
     con.on('data', function(d) {
       // if array, put all images in DOM, add to own images array
       // if single blob, put single image in
-      console.log('got stuff from child!')
+      console.log('PARENT got stuff from child!')
       if (d.constructor == [].constructor) {
         return d.map(insertImage);
       }
@@ -47,13 +49,25 @@ function main() {
       var con = peer.connect(id, copts)
       con.on('open', function() {
         cons.push(con)
-        console.log('wee! My ID is', peer.id)
-        console.log('connected to', id)
+        console.log('CHILD wee! My ID is', peer.id)
+        console.log('CHILD connected to', id)
       })
       con.on('data', function(d) {
-        console.log('got data from', id, d)
+        console.log('CHILD got data from', id, d)
+        if (d.constructor == [].constructor) {
+          return d.map(insertImage);
+        }
         return insertImage(d)
       })
+      // TODO on end of connection, periodically try to reconnect to parent.
+      // peer.on('connection', function(con) {
+      //   con.on('open', function() {
+      //     if (images.length) {
+      //       console.log('CHILD sending to ', con, images)
+      //       return con.send(images)
+      //     }
+      //   })
+      // })
       return
     }
     console.log(e, e.stack);
@@ -99,8 +113,8 @@ function main() {
 }
 
   // Make sure things clean up properly.
-  window.onunload = window.onbeforeunload = function(e) {
-    if (!!peer && !peer.destroyed) {
-      peer.destroy()
-    }
-  };
+  // window.onunload = window.onbeforeunload = function(e) {
+  //   if (!!peer && !peer.destroyed) {
+  //     peer.destroy()
+  //   }
+  // };
