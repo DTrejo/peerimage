@@ -1,5 +1,6 @@
 require('./jquery')
 
+var peer;
 $(main)
 function main() {
   $('#shareurl').val(window.location + '');
@@ -8,12 +9,12 @@ function main() {
   var cons = []
   var images = [];
 
-  var opts = { port: 9000, host: '/', debug: true }
+  var opts = { port: 9000, host: '/', debug: false }
   var reliable = true;
   var copts = { reliable: reliable }
   var id = (window.location.pathname + '').replace(/\//g, '0')
   console.log('woo! My ID is', id)
-  var peer = new Peer(id, opts);
+  peer = new Peer(id, opts);
 
   // PARENT
   peer.on('connection', function(con) {
@@ -26,13 +27,16 @@ function main() {
         console.log('sending to ', con, images)
         con.send(images)
       }
-      con.send('hihi')
+      // con.send('hihi')
     })
     con.on('data', function(d) {
       // if array, put all images in DOM, add to own images array
       // if single blob, put single image in
       console.log('got stuff from child!')
-      console.log(d)
+      if (d.constructor == [].constructor) {
+        return d.map(insertImage);
+      }
+      return insertImage(d)
     })
   })
 
@@ -47,8 +51,8 @@ function main() {
         console.log('connected to', id)
       })
       con.on('data', function(d) {
-        console.log('got data from', id)
-        console.log(d)
+        console.log('got data from', id, d)
+        return insertImage(d)
       })
       return
     }
@@ -78,4 +82,25 @@ function main() {
       console.log('Not sent; no one connected')
     }
   })
+
+  // stolen from cdn.peerjs.com/demo/chat.html
+  function insertImage (data) {
+    // If we're getting a file, create a URL for it.
+    if (data.constructor === ArrayBuffer) {
+      var dataView = new Uint8Array(data);
+      var dataBlob = new Blob([dataView]);
+      var url = URL.createObjectURL(dataBlob);
+      $('<img>', { src: url }).appendTo('body');
+      if (~images.indexOf(dataBlob)) return
+      images.push(dataBlob);
+      console.log('insertImage', images)
+    }
+  }
 }
+
+  // Make sure things clean up properly.
+  window.onunload = window.onbeforeunload = function(e) {
+    if (!!peer && !peer.destroyed) {
+      peer.destroy()
+    }
+  };

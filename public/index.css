@@ -4,7 +4,7 @@ body {
   padding: 1.5em;
 }
 
-body > p {
+p:first-child {
   margin-bottom: 4.5em;
 }
 body > p > label {
