@@ -1,6 +1,6 @@
 # peerimage
 
-built on <peerjs.com>
+built on <http://peerjs.com>
 
 to run:
 
