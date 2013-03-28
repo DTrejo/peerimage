@@ -1,10 +1,11 @@
 {
   "name": "peerimage",
-  "version": "0.0.0",
+  "version": "0.0.0-1",
   "description": "ERROR: No README.md file found!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": "",
   "author": "",
@@ -14,5 +15,9 @@
     "error-page": "0.0.6",
     "ecstatic": "~0.4.1",
     "peer": "~0.1.4"
+  },
+  "subdomain": "peerimage",
+  "engines": {
+    "node": "0.8.x"
   }
 }
