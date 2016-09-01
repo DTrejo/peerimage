@@ -1,0 +1,97 @@
+{
+  "name": "DTrejo/peerimage",
+  "version": "0.1.4",
+  "libraries": {
+    "xv": "^1.1.19"
+  },
+  "title": "",
+  "branch": "",
+  "style": {
+    "name": "Future",
+    "componentSet": {
+      "nav": "nav/BasicNav",
+      "header": "header/BannerHeader",
+      "article": "article/BasicArticle",
+      "footer": "footer/BasicFooter"
+    },
+    "fontFamily": "\"Avenir Next\", Helvetica, sans-serif",
+    "heading": {
+      "fontWeight": 500,
+      "textTransform": "uppercase",
+      "letterSpacing": "0.2em"
+    },
+    "alternativeText": {
+      "textTransform": "uppercase",
+      "fontWeight": 400,
+      "letterSpacing": "0.2em",
+      "opacity": 0.75
+    },
+    "colors": {
+      "text": "#333",
+      "background": "#fff",
+      "primary": "#666",
+      "secondary": "#888",
+      "highlight": "#1f80ff",
+      "muted": "#f6f6f6",
+      "border": "#eee"
+    },
+    "layout": {
+      "centered": true,
+      "maxWidth": 1024,
+      "bannerHeight": "80vh"
+    }
+  },
+  "content": [
+    {
+      "component": "nav",
+      "links": [
+        {
+          "href": "https://github.com/DTrejo/peerimage",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://npmjs.com/package/peerimage",
+          "text": "npm"
+        }
+      ]
+    },
+    {
+      "component": "header",
+      "heading": "peerimage",
+      "subhead": "playing around with peerjs, sending images about",
+      "children": [
+        {
+          "component": "ui/TweetButton",
+          "text": "peerimage: playing around with peerjs, sending images about",
+          "url": null
+        },
+        {
+          "component": "ui/GithubButton",
+          "user": "DTrejo",
+          "repo": "peerimage"
+        }
+      ],
+      "text": "v0.0.0-1"
+    },
+    {
+      "component": "article",
+      "metadata": {
+        "source": "github.readme"
+      },
+      "html": "\n<p>built on <a href=\"http://peerjs.com\">http://peerjs.com</a></p>\n<p>to run:</p>\n<pre>npm install\n<span class=\"hljs-keyword\">node</span> <span class=\"hljs-title\">server</span>.js</pre><p>Then visit <a href=\"http://localhost:8080\">http://localhost:8080</a></p>\n<p>Note: works best on favicons, b/c big images take a long time to transfer, b/c\nreliable data channels not yet implemented by browsers.</p>\n<p>Cheers!\nD</p>\n"
+    },
+    {
+      "component": "footer",
+      "links": [
+        {
+          "href": "https://github.com/DTrejo/peerimage",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://github.com/DTrejo",
+          "text": "DTrejo"
+        }
+      ]
+    }
+  ]
+}
